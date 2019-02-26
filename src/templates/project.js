@@ -5,14 +5,14 @@ import Project from '../components/project';
 
 export const query = graphql`
   query($slug: String!) {
-    projectsJson(slug: { eq: $slug }) {
+    sanityProject(slug: { current: { eq: $slug } }) {
       title
       description
       url
       image {
-        childImageSharp {
+        asset {
           fluid {
-            ...GatsbyImageSharpFluid
+            ...GatsbySanityImageFluid
           }
         }
       }
@@ -21,10 +21,10 @@ export const query = graphql`
 `;
 
 const ProjectTemplate = ({ data }) => {
-  const project = data.projectsJson;
+  const project = data.sanityProject;
   const title = project.title;
   const description = project.description;
-  const imageData = project.image.childImageSharp.fluid;
+  const imageData = project.image.asset.fluid;
   const url = project.url;
 
   return (
