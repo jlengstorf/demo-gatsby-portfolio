@@ -4,7 +4,7 @@
     "slug": "project-1",
     "url": "https://example.com/",
     "image": "./images/project1.jpg",
-    "description": "I built this site to show off my sweet skills!",
+    "description": "I built this to show off my sweet skills!",
     "tags": ["React", "Gatsby", "JavaScript"]
   },
   {
