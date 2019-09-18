@@ -1,31 +1,29 @@
-exports.createPages = async ({ actions, graphql, reporter }) => {
+exports.createPages = async ({ actions, graphql }) => {
   const result = await graphql(`
     {
-      allSanityProject {
+      allProjectsJson {
         edges {
           node {
-            slug {
-              current
-            }
+            slug
           }
         }
       }
     }
   `);
 
-  if (result.error) {
-    reporter.panic('There was a problem loading your projects!');
-    return;
+  if (result.errors) {
+    console.error('There was an error loading projects!');
+    // TODO actually handle the error.
   }
 
-  const projects = result.data.allSanityProject.edges.map(({ node }) => node);
+  const projects = result.data.allProjectsJson.edges;
 
-  projects.forEach(project => {
+  projects.forEach(({ node: project }) => {
     actions.createPage({
-      path: `/${project.slug.current}/`,
+      path: `/${project.slug}`,
       component: require.resolve('./src/templates/project.js'),
       context: {
-        slug: project.slug.current
+        slug: project.slug
       }
     });
   });

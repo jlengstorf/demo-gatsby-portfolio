@@ -3,35 +3,18 @@ import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import Project from '../components/project';
 
-// export const query = graphql`
-//   query($slug: String!) {
-//     projectsJson(slug: { eq: $slug }) {
-//       title
-//       description
-//       url
-//       tags
-//       image {
-//         childImageSharp {
-//           fluid {
-//             ...GatsbyImageSharpFluid
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
-
 export const query = graphql`
   query($slug: String!) {
-    sanityProject(slug: { current: { eq: $slug } }) {
+    projectsJson(slug: { eq: $slug }) {
+      id
       title
-      description
+      slug
       url
-      tags
+      description
       image {
-        asset {
+        childImageSharp {
           fluid {
-            ...GatsbySanityImageFluid
+            ...GatsbyImageSharpFluid
           }
         }
       }
@@ -39,18 +22,23 @@ export const query = graphql`
   }
 `;
 
-// const ProjectPage = ({ data: { projectsJson: project } }) => (
-const ProjectPage = ({ data: { sanityProject: project } }) => (
-  <Layout>
-    <Project
-      title={project.title}
-      // imageData={project.image.childImageSharp.fluid}
-      imageData={project.image.asset.fluid}
-      description={project.description}
-      tags={project.tags}
-      url={project.url}
-    />
-  </Layout>
-);
+const ProjectTemplate = ({ data }) => {
+  const projectNode = data.projectsJson;
 
-export default ProjectPage;
+  const project = {
+    id: projectNode.id,
+    title: projectNode.title,
+    image: projectNode.image.childImageSharp.fluid,
+    url: projectNode.url,
+    slug: projectNode.slug,
+    description: projectNode.description
+  };
+
+  return (
+    <Layout>
+      <Project {...project} />
+    </Layout>
+  );
+};
+
+export default ProjectTemplate;
