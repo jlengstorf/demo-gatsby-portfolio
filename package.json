@@ -13,12 +13,11 @@
   },
   "dependencies": {
     "gatsby": "^2.1.0",
-    "gatsby-image": "^2.0.30",
-    "gatsby-plugin-sharp": "^2.0.22",
-    "gatsby-source-filesystem": "^2.0.23",
-    "gatsby-source-sanity": "^1.1.1",
-    "gatsby-transformer-json": "^2.1.8",
-    "gatsby-transformer-sharp": "^2.1.14",
+    "gatsby-image": "^2.2.27",
+    "gatsby-plugin-sharp": "^2.2.29",
+    "gatsby-source-filesystem": "^2.1.31",
+    "gatsby-transformer-json": "^2.2.13",
+    "gatsby-transformer-sharp": "^2.2.21",
     "react": "^16.8.1",
     "react-dom": "^16.8.1"
   },
